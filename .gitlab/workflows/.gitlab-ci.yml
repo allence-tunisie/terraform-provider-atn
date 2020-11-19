@@ -16,5 +16,7 @@ before_script:
 
 unit_tests:
   stage: test
+  tags:
+    - aws-runner
   script:
     - go test -v ./... -coverprofile .testCoverage.txt
