@@ -26,26 +26,36 @@ before_script:
 
 unit_tests:
   stage: test
+  tags:
+    - aws-runner
   script:
     - go test -short ${PKG_LIST}
 
 race_detector:
   stage: test
+  tags:
+    - aws-runner
   script:
     - go test -race -short ${PKG_LIST}
 
 memory_sanitizer:
   stage: test
+  tags:
+    - aws-runner
   script:
     - go test -msan -short ${PKG_LIST}
 
 code_coverage:
   stage: test
+  tags:
+    - aws-runner
   script:
     - ./tools/coverage.sh
 
 code_coverage_report:
   stage: test
+  tags:
+    - aws-runner
   script:
     - ./tools/coverage.sh html
   only:
@@ -53,10 +63,14 @@ code_coverage_report:
 
 lint_code:
   stage: test
+  tags:
+    - aws-runner
   script:
     - golint -set_exit_status ${PKG_LIST}
 
 build:
   stage: build
+  tags:
+    - aws-runner
   script:
     - go build -i -v $(PKG)
