@@ -2,7 +2,7 @@ image: golang:1.15.5
 
 variables:
   PROJECT_NAME: "terraform-provider-atn"
-  PKG : "github.com/allence-tunisie/$(PROJECT_NAME)"
+  PKG : "github.com/allence-tunisie/${PROJECT_NAME}"
   PKG_LIST : $(go list ${PKG}/... | grep -v /vendor/)
   GO_FILES : $(find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
 cache:
