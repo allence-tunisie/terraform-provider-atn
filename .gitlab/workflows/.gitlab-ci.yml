@@ -2,9 +2,7 @@ image: golang:1.15.5
 
 variables:
   PROJECT_NAME: "terraform-provider-atn"
-  PKG : "github.com/allence-tunisie/$(PROJECT_NAME)"
-  PKG_LIST : $(go list ${PKG}/... | grep -v /vendor/)
-  GO_FILES : $(find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
+
 cache:
   paths:
     - /go/src/github.com
@@ -35,10 +33,9 @@ code_coverage_report:
     - ./tools/coverage.sh html
   only:
     - master
-
 build:
   stage: build
   tags:
     - aws-runner
   script:
-    - go build -i -v $(PKG)
+    - go build -i -v
