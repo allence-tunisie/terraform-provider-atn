@@ -1,11 +1,10 @@
 image: golang:1.9
 
 variables:
-  PROJECT_NAME: "atn"
-  PKG : "github.com/terraform-provider-atn/$(PROJECT_NAME)"
+  PROJECT_NAME: "terraform-provider-atn"
+  PKG : "github.com/allence-tunisie/$(PROJECT_NAME)"
   PKG_LIST : $(go list ${PKG}/... | grep -v /vendor/)
   GO_FILES : $(find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
-
 cache:
   paths:
     - /apt-cache
@@ -19,9 +18,9 @@ stages:
   - build
 
 before_script:
-  - mkdir -p /go/src/github.com/terraform-provider-atn /go/src/_/builds
-  - cp -r $CI_PROJECT_DIR /go/src/github.com/terraform-provider-atn/atn
-  - ln -s /go/src/github.com/terraform-provider-atn /go/src/_/builds/terraform-provider-atn
+  - mkdir -p /go/src/github.com/allence-tunisie /go/src/_/builds
+  - cp -r $CI_PROJECT_DIR /go/src/github.com/allence-tunisie/atn
+  - ln -s /go/src/github.com/allence-tunisie /go/src/_/builds/allence-tunisie
   - go get -v -d ./...
 
 unit_tests:
