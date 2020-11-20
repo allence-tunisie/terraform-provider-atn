@@ -18,9 +18,9 @@ stages:
 
 before_script:
   - chmod +x ./tools/coverage.sh
-  - mkdir -p /go/src/github.com/allence-tunisie /go/src/_/builds
-  - cp -r $CI_PROJECT_DIR /go/src/github.com/allence-tunisie/terraform-provider-atn
-  - ln -s /go/src/github.com/allence-tunisie /go/src/_/builds/allence-tunisie
+  - mkdir -p /usr/local/go/src/github.com/allence-tunisie /usr/local/go/src/_/builds
+  - cp -r $CI_PROJECT_DIR /usr/local/go/src/github.com/allence-tunisie/terraform-provider-atn
+  - ln -s /usr/local/go/src/github.com/allence-tunisie /usr/local/go/src/_/builds/allence-tunisie
   - go get -v -d ./...
 
 unit_tests:
