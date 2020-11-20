@@ -21,7 +21,7 @@ stages:
 before_script:
   - mkdir -p /go/src/github.com/terraform-provider-atn /go/src/_/builds
   - cp -r $CI_PROJECT_DIR /go/src/github.com/terraform-provider-atn/atn
-  - ln -s /go/src/github.com/terraform-provider-atn /go/src/_/builds/pantomath-io
+  - ln -s /go/src/github.com/terraform-provider-atn /go/src/_/builds/terraform-provider-atn
   - go get -v -d ./...
 
 unit_tests:
