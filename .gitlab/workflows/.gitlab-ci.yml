@@ -26,29 +26,7 @@ unit_tests:
   tags:
     - aws-runner
   script:
-    - go test -short ./...
-
-race_detector:
-  stage: test
-  tags:
-    - aws-runner
-  script:
-    - go test -race -short ./...
-
-memory_sanitizer:
-  stage: test
-  tags:
-    - aws-runner
-  script:
-    - go test -msan -short ./...
-
-code_coverage:
-  stage: test
-  tags:
-    - aws-runner
-  script:
-    - ./tools/coverage.sh
-
+    - go test -v ./...
 code_coverage_report:
   stage: test
   tags:
@@ -57,13 +35,6 @@ code_coverage_report:
     - ./tools/coverage.sh html
   only:
     - master
-
-lint_code:
-  stage: test
-  tags:
-    - aws-runner
-  script:
-    - golint -set_exit_status ${PKG_LIST}
 
 build:
   stage: build
