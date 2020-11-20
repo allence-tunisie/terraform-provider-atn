@@ -25,5 +25,5 @@ if [ "$1" == "html" ]; then
     go tool cover -html="${COVERAGE_DIR}"/coverage.cov -o coverage.html ;
 fi
 
- Remove the coverage files directory
+#Remove the coverage files directory
 rm -rf "$COVERAGE_DIR";

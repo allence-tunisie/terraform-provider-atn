@@ -2,16 +2,15 @@ image: golang:1.15.5
 
 variables:
   PROJECT_NAME: "terraform-provider-atn"
-  PKG : "github.com/allence-tunisie/${PROJECT_NAME}"
+  PKG : "github.com/allence-tunisie/$(PROJECT_NAME)"
   PKG_LIST : $(go list ${PKG}/... | grep -v /vendor/)
   GO_FILES : $(find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
 cache:
   paths:
-    - /apt-cache
-    - /go/src/github.com
-    - /go/src/golang.org
-    - /go/src/google.golang.org
-    - /go/src/gopkg.in
+    - /usr/local/go/src/github.com
+    - /usr/local/go/src/golang.org
+    - /usr/local/go/src/google.golang.org
+    - /usr/local/go/src/gopkg.in
 
 stages:
   - test
@@ -20,7 +19,7 @@ stages:
 before_script:
   - chmod +x ./tools/coverage.sh
   - mkdir -p /go/src/github.com/allence-tunisie /go/src/_/builds
-  - cp -r $CI_PROJECT_DIR /go/src/github.com/allence-tunisie/atn
+  - cp -r $CI_PROJECT_DIR /go/src/github.com/allence-tunisie/terraform-provider-atn
   - ln -s /go/src/github.com/allence-tunisie /go/src/_/builds/allence-tunisie
   - go get -v -d ./...
 
