@@ -7,21 +7,18 @@ variables:
   GO_FILES : $(find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
 cache:
   paths:
-    - $GOPATH/go/src/github.com
-    - $GOPATH/go/src/golang.org
-    - $GOPATH/go/src/google.golang.org
-    - $GOPATH/go/src/gopkg.in
+    - /go/src/github.com
+    - /go/src/golang.org
+    - /go/src/google.golang.org
+    - /go/src/gopkg.in
 stages:
   - test
   - build
-
 before_script:
-  - echo $GOPATH
-  - cd /go && ls -l
   - chmod +x ./tools/coverage.sh
-  - mkdir -p $GOPATH/go/src/github.com/allence-tunisie $(GOPATH)/go/src/_/builds
-  - cp -r $CI_PROJECT_DIR $GOPATH/go/src/github.com/allence-tunisie/atn
-  - ln -s $GOPATH/go/src/github.com/allence-tunisie $(GOPATH)/go/src/_/builds/allence-tunisie
+  - mkdir -p /go/src/github.com/allence-tunisie /go/src/_/builds
+  - cp -r $CI_PROJECT_DIR /go/src/github.com/allence-tunisie/terraform-provider-atn
+  - ln -s /go/src/github.com/allence-tunisie /go/src/_/builds/allence-tunisie
   - go get -v -d ./...
 
 unit_tests:
@@ -29,21 +26,21 @@ unit_tests:
   tags:
     - aws-runner
   script:
-    - go test -short ${PKG_LIST}
+    - go test -short ./...
 
 race_detector:
   stage: test
   tags:
     - aws-runner
   script:
-    - go test -race -short ${PKG_LIST}
+    - go test -race -short ./...
 
 memory_sanitizer:
   stage: test
   tags:
     - aws-runner
   script:
-    - go test -msan -short ${PKG_LIST}
+    - go test -msan -short ./...
 
 code_coverage:
   stage: test
