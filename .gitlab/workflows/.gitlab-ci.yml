@@ -7,20 +7,20 @@ variables:
   GO_FILES : $(find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
 cache:
   paths:
-    - /usr/local/go/src/github.com
-    - /usr/local/go/src/golang.org
-    - /usr/local/go/src/google.golang.org
-    - /usr/local/go/src/gopkg.in
-
+    - $(GOPATH)/go/src/github.com
+    - $(GOPATH)/go/src/golang.org
+    - $(GOPATH)/go/src/google.golang.org
+    - $(GOPATH)/go/src/gopkg.in
 stages:
   - test
   - build
 
 before_script:
+  - echo $GOPATH
   - chmod +x ./tools/coverage.sh
-  - mkdir -p /usr/local/go/src/github.com/allence-tunisie /usr/local/go/src/_/builds
-  - cp -r $CI_PROJECT_DIR /usr/local/go/src/github.com/allence-tunisie/terraform-provider-atn
-  - ln -s /usr/local/go/src/github.com/allence-tunisie /usr/local/go/src/_/builds/allence-tunisie
+  - mkdir -p $(GOPATH)/go/src/github.com/allence-tunisie $(GOPATH)/go/src/_/builds
+  - cp -r $CI_PROJECT_DIR $(GOPATH)/go/src/github.com/allence-tunisie/atn
+  - ln -s $(GOPATH)/go/src/github.com/allence-tunisie $(GOPATH)/go/src/_/builds/allence-tunisie
   - go get -v -d ./...
 
 unit_tests:
