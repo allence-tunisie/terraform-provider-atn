@@ -1,8 +1,8 @@
 image: golang:1.9
 
 variables:
-  PROJECT_NAME: "demo-tools"
-  PKG : "gitlab.com/pantomath-io/$(PROJECT_NAME)"
+  PROJECT_NAME: "atn"
+  PKG : "github.com/terraform-provider-atn/$(PROJECT_NAME)"
   PKG_LIST : $(go list ${PKG}/... | grep -v /vendor/)
   GO_FILES : $(find . -name '*.go' | grep -v /vendor/ | grep -v _test.go)
 
@@ -19,9 +19,9 @@ stages:
   - build
 
 before_script:
-  - mkdir -p /go/src/gitlab.com/pantomath-io /go/src/_/builds
-  - cp -r $CI_PROJECT_DIR /go/src/gitlab.com/pantomath-io/pantomath
-  - ln -s /go/src/gitlab.com/pantomath-io /go/src/_/builds/pantomath-io
+  - mkdir -p /go/src/github.com/terraform-provider-atn /go/src/_/builds
+  - cp -r $CI_PROJECT_DIR /go/src/github.com/terraform-provider-atn/atn
+  - ln -s /go/src/github.com/terraform-provider-atn /go/src/_/builds/pantomath-io
   - go get -v -d ./...
 
 unit_tests:
